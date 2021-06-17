@@ -1,0 +1,105 @@
+<dmn:definitions xmlns:dmn="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns="http://www.trisotech.com/definitions/_50aea0bb-4482-48f6-acfe-4abc1a1bd0d6" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:openapi="https://openapis.org/omg/extension/1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" xmlns:drools="http://www.drools.org/kie/dmn/1.2" xmlns:tc="http://www.omg.org/spec/DMN/20160719/testcase" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rss="http://purl.org/rss/2.0/" xmlns:trisodmn="http://www.trisotech.com/2016/triso/dmn" xmlns:dmndi="http://www.omg.org/spec/DMN/20180521/DMNDI/" xmlns:triso="http://www.trisotech.com/2015/triso/modeling" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="_50aea0bb-4482-48f6-acfe-4abc1a1bd0d6" name="RecommenderHitPolicy4" expressionLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" typeLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" namespace="http://www.trisotech.com/definitions/_50aea0bb-4482-48f6-acfe-4abc1a1bd0d6">
+  <dmn:extensionElements/>
+  <dmn:itemDefinition id="_E0B498EC-C34B-4095-B98C-5534CACEEEF0" name="tLevel" isCollection="false">
+    <dmn:typeRef>number</dmn:typeRef>
+    <dmn:allowedValues id="_00D5838F-6B8A-49EA-8387-653C6EA7B8EF">
+      <dmn:text>&gt;=0</dmn:text>
+    </dmn:allowedValues>
+  </dmn:itemDefinition>
+  <dmn:inputData id="_3aad4dbe-ad99-4dc3-8fad-cba91d4a7c15" name="Level">
+    <dmn:extensionElements/>
+    <dmn:variable id="_09a643aa-0f89-4216-ab5a-58179fa86b33" name="Level" typeRef="tLevel"/>
+  </dmn:inputData>
+  <dmn:decision id="_0cd2bcb7-1882-4e26-8d7f-3dd35b04c2d4" name="Evaluation">
+    <dmn:extensionElements/>
+    <dmn:variable id="_4d97f0f6-9bf8-4693-b049-dadd34243900" name="Evaluation" typeRef="string"/>
+    <dmn:informationRequirement id="_e3435805-4eed-4fcc-83d0-7a26c50a82a6">
+      <dmn:requiredInput href="#_3aad4dbe-ad99-4dc3-8fad-cba91d4a7c15"/>
+    </dmn:informationRequirement>
+    <dmn:decisionTable id="_3aa68aee-6314-482f-a0be-84c2411d65d7" typeRef="string" hitPolicy="FIRST" preferredOrientation="Rule-as-Row" outputLabel="Evaluation">
+      <dmn:input id="_de33d278-570e-4065-9d68-9f8ba6f4d1e6">
+        <dmn:inputExpression id="_BFF97358-25A6-4D50-8A51-BFC3E3909FED" typeRef="tLevel">
+          <dmn:text>Level</dmn:text>
+        </dmn:inputExpression>
+        <dmn:inputValues id="_C3996A36-4BE8-4234-890D-D91ECFCD27E6">
+          <dmn:text>&gt;=0</dmn:text>
+        </dmn:inputValues>
+      </dmn:input>
+      <dmn:output id="_26189690-cdb6-466d-b2d7-289380c47e83">
+        <dmn:outputValues id="_0BCBABAB-E9E9-415A-B7C7-DC4135DE65BC">
+          <dmn:text>"Danger", "Harmful", "No risk"</dmn:text>
+        </dmn:outputValues>
+      </dmn:output>
+      <dmn:annotation name="Description"/>
+      <dmn:rule id="_663e0683-f440-4031-bdb9-0acd121d4651">
+        <dmn:inputEntry id="_b544eee7-d7b9-491d-83a4-e4916029e7f6">
+          <dmn:text>[0..80)</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_6a5f720b-5063-4b3e-8062-c06fd6903e90">
+          <dmn:text>"No risk"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_86e048f5-273a-4b59-9a5a-adcf699ef613">
+        <dmn:inputEntry id="_9a7df30a-fca1-4d36-93e1-f64e8d69cda7">
+          <dmn:text>&gt;=80</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_8581780c-bef1-458e-83df-5402019af2cb">
+          <dmn:text>"Harmful"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text>"Harmful sound levels"</dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_9ad17ef0-3226-4c07-9a83-bd72ef71612d">
+        <dmn:inputEntry id="_c04cae1e-a7e8-46d6-8cdc-2cfa4f6adcb9">
+          <dmn:text>&gt;=120</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_e08a897c-9c66-4ee0-89b0-d3c74996c9cf">
+          <dmn:text>"Danger"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text>"Seconds of exposure may cause irreversible damage"</dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+    </dmn:decisionTable>
+  </dmn:decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="_A2E3EE08-6A15-47BA-8289-9D6240CA7B73" name="DRG">
+      <di:extension>
+        <kie:ComponentsWidthsExtension xmlns:kie="http://www.drools.org/kie/dmn/1.2">
+          <kie:ComponentWidths dmnElementRef="_3aa68aee-6314-482f-a0be-84c2411d65d7">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>443</kie:width>
+          </kie:ComponentWidths>
+        </kie:ComponentsWidthsExtension>
+      </di:extension>
+      <dmndi:DMNShape id="dmnshape-drg-_3aad4dbe-ad99-4dc3-8fad-cba91d4a7c15" dmnElementRef="_3aad4dbe-ad99-4dc3-8fad-cba91d4a7c15" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="50" y="225" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_0cd2bcb7-1882-4e26-8d7f-3dd35b04c2d4" dmnElementRef="_0cd2bcb7-1882-4e26-8d7f-3dd35b04c2d4" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="50" y="50" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="dmnedge-drg-_e3435805-4eed-4fcc-83d0-7a26c50a82a6" dmnElementRef="_e3435805-4eed-4fcc-83d0-7a26c50a82a6">
+        <di:waypoint x="100" y="250"/>
+        <di:waypoint x="100" y="75"/>
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</dmn:definitions>
